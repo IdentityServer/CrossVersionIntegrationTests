@@ -11,7 +11,8 @@ namespace IdentityServer4withRSA
             {
                 new Scope
                 {
-                    Name = "api"
+                    Name = "api",
+                    ScopeSecrets = { new Secret("secret".Sha256()) }
                 }
             };
         }
@@ -20,6 +21,7 @@ namespace IdentityServer4withRSA
         {
             return new List<Client>
             {
+                // JWT
                 new Client
                 {
                     ClientId = "client",
@@ -27,6 +29,17 @@ namespace IdentityServer4withRSA
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes = { "api" }
+                },
+                // reference
+                new Client
+                {
+                    ClientId = "client.reference",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedScopes = { "api" },
+
+                    AccessTokenType = AccessTokenType.Reference
                 }
             };
         }

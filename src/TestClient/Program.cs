@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace TestClient
 {
-    
-
     public class Program
     {
         static TestCase[] cases = new[]
@@ -23,11 +21,13 @@ namespace TestClient
                     new Api
                     {
                         Description = "ASP.NET Core",
+                        ClientId = "client",
                         Url = "http://localhost:5050"
                     },
                     new Api
                     {
                         Description = "Katana",
+                        ClientId = "client",
                         Url = "http://localhost:6050"
                     }
                 }
@@ -41,13 +41,61 @@ namespace TestClient
                 {
                     new Api
                     {
-                        Description = "ASP.NET Core",
+                        Description = "ASP.NET Core (JWT)",
+                        ClientId = "client",
+                        Url = "http://localhost:5051"
+                    },
+                    // does not work right now
+                    //new Api
+                    //{
+                    //    Description = "Katana",
+                    //    ClientId = "client",
+                    //    Url = "http://localhost:6051"
+                    //}
+                    new Api
+                    {
+                        Description = "ASP.NET Core (reference)",
+                        ClientId = "client.reference",
                         Url = "http://localhost:5051"
                     },
                     new Api
                     {
-                        Description = "Katana",
+                        Description = "Katana (reference)",
+                        ClientId = "client.reference",
                         Url = "http://localhost:6051"
+                    }
+                }
+            },
+            new TestCase
+            {
+                Description = "IdentityServer3",
+                TokenEndpoint = "http://localhost:5002/connect/token",
+
+                Apis =
+                {
+                    new Api
+                    {
+                        Description = "ASP.NET Core (JWT)",
+                        ClientId = "client",
+                        Url = "http://localhost:5052"
+                    },
+                    new Api
+                    {
+                        Description = "ASP.NET Core (reference)",
+                        ClientId = "client.reference",
+                        Url = "http://localhost:5052"
+                    },
+                    new Api
+                    {
+                        Description = "Katana (JWT)",
+                        ClientId = "client",
+                        Url = "http://localhost:6052"
+                    },
+                    new Api
+                    {
+                        Description = "Katana (reference)",
+                        ClientId = "client.reference",
+                        Url = "http://localhost:6052"
                     }
                 }
             }
@@ -66,10 +114,10 @@ namespace TestClient
             {
                 Console.WriteLine($"Test:           {test.Description}\n");
 
-                var token = await GetToken(test.TokenEndpoint);
-
                 foreach (var api in test.Apis)
                 {
+                    var token = await GetToken(test.TokenEndpoint, api.ClientId);
+
                     Console.WriteLine($"API:            {api.Description}");
 
                     await CallApi(api.Url, token);
@@ -79,9 +127,9 @@ namespace TestClient
             }
         }
 
-        private static async Task<string> GetToken(string endpoint)
+        private static async Task<string> GetToken(string endpoint, string clientId)
         {
-            var tokenClient = new TokenClient(endpoint, "client", "secret");
+            var tokenClient = new TokenClient(endpoint, clientId, "secret");
             var response = await tokenClient.RequestClientCredentialsAsync("api");
 
             if (response.IsError)
@@ -115,5 +163,6 @@ namespace TestClient
     {
         public string Url { get; set; }
         public string Description { get; set; }
+        public string ClientId { get; set; }
     }
 }

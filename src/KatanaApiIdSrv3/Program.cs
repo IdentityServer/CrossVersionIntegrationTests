@@ -11,9 +11,9 @@ namespace KatanaApi
     {
         static void Main(string[] args)
         {
-            Console.Title = "Katana API using IS4 and RSA";
+            Console.Title = "Katana API using IS3";
 
-            using (WebApp.Start<Startup>("http://localhost:6051"))
+            using (WebApp.Start<Startup>("http://localhost:6052"))
             {
                 Console.ReadLine();
             }
@@ -31,8 +31,11 @@ namespace KatanaApi
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
-                Authority = "http://localhost:5001",
+                Authority = "http://localhost:5002",
                 RequiredScopes = new[] { "api" },
+
+                ClientId = "api",
+                ClientSecret = "secret",
 
                 DelayLoadMetadata = true
             });

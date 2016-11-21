@@ -21,7 +21,7 @@ namespace CoreApiIdSrv4withX509
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                Authority = "http://localhost:5001",
+                Authority = "http://localhost:5002",
                 RequireHttpsMetadata = false,
 
                 ScopeName = "api",
