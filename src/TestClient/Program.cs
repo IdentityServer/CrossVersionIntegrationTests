@@ -45,13 +45,12 @@ namespace TestClient
                         ClientId = "client",
                         Url = "http://localhost:5051"
                     },
-                    // does not work right now
-                    //new Api
-                    //{
-                    //    Description = "Katana",
-                    //    ClientId = "client",
-                    //    Url = "http://localhost:6051"
-                    //}
+                    new Api
+                    {
+                        Description = "Katana",
+                        ClientId = "client",
+                        Url = "http://localhost:6051"
+                    },
                     new Api
                     {
                         Description = "ASP.NET Core (reference)",
