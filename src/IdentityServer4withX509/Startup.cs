@@ -15,7 +15,7 @@ namespace IdentityServer4withX509
 
             services.AddIdentityServer()
                 .AddSigningCredential(new X509Certificate2(certPath))
-                .AddInMemoryScopes(Config.GetScopes())
+                .AddInMemoryApiResources(Config.GetApis())
                 .AddInMemoryClients(Config.GetClients());
         }
 

@@ -5,14 +5,13 @@ namespace IdentityServer4withRSA
 {
     public class Config
     {
-        public static IEnumerable<Scope> GetScopes()
+        public static IEnumerable<ApiResource> GetApis()
         {
-            return new List<Scope>
+            return new List<ApiResource>
             {
-                new Scope
+                new ApiResource("api")
                 {
-                    Name = "api",
-                    ScopeSecrets = { new Secret("secret".Sha256()) }
+                    ApiSecrets = { new Secret("secret".Sha256()) }
                 }
             };
         }

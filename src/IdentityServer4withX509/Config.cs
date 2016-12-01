@@ -5,14 +5,11 @@ namespace IdentityServer4withX509
 {
     public class Config
     {
-        public static IEnumerable<Scope> GetScopes()
+        public static IEnumerable<ApiResource> GetApis()
         {
-            return new List<Scope>
+            return new List<ApiResource>
             {
-                new Scope
-                {
-                    Name = "api"
-                }
+                new ApiResource("api")
             };
         }
 

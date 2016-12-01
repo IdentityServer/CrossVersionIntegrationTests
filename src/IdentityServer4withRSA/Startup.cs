@@ -14,7 +14,7 @@ namespace IdentityServer4withRSA
 
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
-                .AddInMemoryScopes(Config.GetScopes())
+                .AddInMemoryApiResources(Config.GetApis())
                 .AddInMemoryClients(Config.GetClients());
         }
 
