@@ -24,8 +24,8 @@ namespace CoreApiIdSrv4withX509
                 Authority = "http://localhost:5001",
                 RequireHttpsMetadata = false,
 
-                ScopeName = "api",
-                ScopeSecret = "secret"
+                ApiName = "api",
+                ApiSecret = "secret"
             });
 
             app.UseMvc();

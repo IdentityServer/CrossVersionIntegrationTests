@@ -6,7 +6,7 @@
     },
     "Microsoft.AspNetCore.Diagnostics": "1.1.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
-    "IdentityServer4": "1.0.0-rc5",
+    "IdentityServer4": "1.0.0",
     "Microsoft.Extensions.Logging.Console": "1.1.0"
   },
 

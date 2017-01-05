@@ -10,7 +10,7 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0",
 
     "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-    "IdentityServer4.AccessTokenValidation": "1.0.1-rc3"
+    "IdentityServer4.AccessTokenValidation": "1.0.1"
   },
 
   "tools": {
