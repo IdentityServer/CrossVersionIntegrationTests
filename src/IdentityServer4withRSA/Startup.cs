@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.PlatformAbstractions;
-using System.IO;
 
 namespace IdentityServer4withRSA
 {
@@ -10,8 +8,6 @@ namespace IdentityServer4withRSA
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            var certPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "idsrvtest.pfx");
-
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
                 .AddInMemoryApiResources(Config.GetApis())
