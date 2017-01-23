@@ -1,4 +1,4 @@
-﻿{
+{
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
@@ -8,9 +8,8 @@
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
     "Microsoft.Extensions.Logging.Console": "1.0.0",
-
     "Microsoft.AspNetCore.Mvc.Core": "1.0.1",
-    "IdentityServer4.AccessTokenValidation": "1.0.2"
+    "IdentityServer4.AccessTokenValidation": "1.0.4"
   },
 
   "tools": {

@@ -25,7 +25,13 @@ namespace CoreApiIdSrv4withX509
                 RequireHttpsMetadata = false,
 
                 ApiName = "api",
-                ApiSecret = "secret"
+                ApiSecret = "secret",
+
+                // this is only needed because IS3 does not include the API name in the JWT audience list
+                // so we disable UseIdentityServerAuthentication JWT audience check and rely upon
+                // scope validation to ensure we're only accepting tokens for the right API
+                LegacyAudienceValidation = true,
+                AllowedScopes = { "api" }
             });
 
             app.UseMvc();
