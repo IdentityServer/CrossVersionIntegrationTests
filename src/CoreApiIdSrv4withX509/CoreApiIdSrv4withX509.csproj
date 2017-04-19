@@ -19,7 +19,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="1.1.2" />
-    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="1.1.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="1.2.0" />
   </ItemGroup>
 
 </Project>
