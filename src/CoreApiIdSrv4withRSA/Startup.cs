@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace CoreApiIdSrv4withX509
 {
@@ -11,23 +10,22 @@ namespace CoreApiIdSrv4withX509
         {
             services.AddMvcCore()
                 .AddAuthorization();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:5001";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ApiName = "api";
+                    options.ApiSecret = "secret";
+                });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddConsole();
-
             app.UseDeveloperExceptionPage();
-
-            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            {
-                Authority = "http://localhost:5001",
-                RequireHttpsMetadata = false,
-
-                ApiName = "api",
-                ApiSecret = "secret"
-            });
-
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

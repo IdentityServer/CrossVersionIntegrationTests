@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using System;
+using Microsoft.AspNetCore;
 
 namespace IdentityServer4withRSA
 {
@@ -10,14 +10,11 @@ namespace IdentityServer4withRSA
         {
             Console.Title = "IdentityServer4 using RSA";
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
+            WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://localhost:5001")
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+                .Build()
+                .Run();
         }
     }
 }

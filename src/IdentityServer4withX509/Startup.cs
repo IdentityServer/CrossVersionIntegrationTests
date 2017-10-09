@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -19,12 +18,9 @@ namespace IdentityServer4withX509
                 .AddInMemoryClients(Config.GetClients());
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddConsole(LogLevel.Information);
-
             app.UseDeveloperExceptionPage();
-
             app.UseIdentityServer();
         }
     }

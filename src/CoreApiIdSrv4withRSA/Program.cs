@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using System;
+using Microsoft.AspNetCore;
 
 namespace CoreApiIdSrv4withX509
 {
@@ -10,15 +10,11 @@ namespace CoreApiIdSrv4withX509
         {
             Console.Title = "Core API using IS4 RSA";
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
+            WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://localhost:5051")
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+                .Build()
+                .Run();
         }
     }
 }

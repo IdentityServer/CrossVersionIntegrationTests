@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using IdentityServer4.AccessTokenValidation;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace CoreApiIdSrv4withX509
 {
@@ -9,31 +10,33 @@ namespace CoreApiIdSrv4withX509
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore()
+            services.AddMvcCore(options =>
+            {
+                // IS3 does not include the api name/audience - hence the extra scope check
+                options.Filters.Add(new AuthorizeFilter(ScopePolicy.Create("api")));
+            })
                 .AddAuthorization();
+
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "http://localhost:5002";
+                    options.RequireHttpsMetadata = false;
+
+                    options.ApiName = "api";
+                    options.ApiSecret = "secret";
+
+                    // this is only needed because IS3 does not include the API name in the JWT audience list
+                    // so we disable UseIdentityServerAuthentication JWT audience check and rely upon
+                    // scope validation to ensure we're only accepting tokens for the right API
+                    options.LegacyAudienceValidation = true;
+                });
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddConsole();
-
             app.UseDeveloperExceptionPage();
-
-            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
-            {
-                Authority = "http://localhost:5002",
-                RequireHttpsMetadata = false,
-
-                ApiName = "api",
-                ApiSecret = "secret",
-
-                // this is only needed because IS3 does not include the API name in the JWT audience list
-                // so we disable UseIdentityServerAuthentication JWT audience check and rely upon
-                // scope validation to ensure we're only accepting tokens for the right API
-                LegacyAudienceValidation = true,
-                AllowedScopes = { "api" }
-            });
-
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

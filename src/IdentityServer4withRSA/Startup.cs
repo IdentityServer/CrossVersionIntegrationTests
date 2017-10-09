@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace IdentityServer4withRSA
 {
@@ -9,17 +8,14 @@ namespace IdentityServer4withRSA
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityServer()
-                .AddTemporarySigningCredential()
+                .AddSigningCredential(IdentityServerBuilderExtensionsCrypto.CreateRsaSecurityKey())
                 .AddInMemoryApiResources(Config.GetApis())
                 .AddInMemoryClients(Config.GetClients());
         }
 
-        public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            loggerFactory.AddConsole(LogLevel.Information);
-
             app.UseDeveloperExceptionPage();
-
             app.UseIdentityServer();
         }
     }

@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using System;
+using Microsoft.AspNetCore;
 
 namespace IdentityServer4withX509
 {
@@ -10,14 +10,11 @@ namespace IdentityServer4withX509
         {
             Console.Title = "IdentityServer4 using X509";
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
+            WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://localhost:5000")
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
-                .Build();
-
-            host.Run();
+                .Build()
+                .Run();
         }
     }
 }

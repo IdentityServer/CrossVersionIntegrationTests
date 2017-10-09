@@ -1,6 +1,6 @@
-﻿using System.IO;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using System;
+using Microsoft.AspNetCore;
 
 namespace CoreApiIdSrv4withX509
 {
@@ -10,15 +10,13 @@ namespace CoreApiIdSrv4withX509
         {
             Console.Title = "Core API using IS3";
 
-            var host = new WebHostBuilder()
-                .UseKestrel()
+            BuildWebHost(args).Run();
+        }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
                 .UseUrls("http://localhost:5052")
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
-
-            host.Run();
-        }
     }
 }

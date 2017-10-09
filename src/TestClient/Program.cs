@@ -1,6 +1,5 @@
 ﻿using IdentityModel.Client;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -100,9 +99,7 @@ namespace TestClient
             }
         };
 
-        public static void Main(string[] args) => MainAsync().GetAwaiter().GetResult();
-
-        public static async Task MainAsync()
+        public static async Task Main()
         {
             Console.Title = "Test Client";
 

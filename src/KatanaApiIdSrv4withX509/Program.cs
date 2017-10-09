@@ -1,5 +1,4 @@
 ﻿using IdentityServer3.AccessTokenValidation;
-using KatanaApi;
 using Microsoft.Owin.Hosting;
 using Microsoft.Owin.Logging;
 using Owin;
