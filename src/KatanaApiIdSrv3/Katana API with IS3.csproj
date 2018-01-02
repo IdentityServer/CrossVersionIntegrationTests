@@ -37,7 +37,7 @@
       <HintPath>..\..\packages\IdentityModel.1.13.1\lib\net45\IdentityModel.dll</HintPath>
     </Reference>
     <Reference Include="IdentityServer3.AccessTokenValidation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IdentityServer3.AccessTokenValidation.2.15.0\lib\net45\IdentityServer3.AccessTokenValidation.dll</HintPath>
+      <HintPath>..\..\packages\IdentityServer3.AccessTokenValidation.2.15.1\lib\net45\IdentityServer3.AccessTokenValidation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.4.403061554\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
